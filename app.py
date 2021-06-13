@@ -27,6 +27,6 @@ api.add_resource(Item,'/<string:name>')
 api.add_resource(Itemlist,'/')
 api.add_resource(UserRegister,'/Register')
 
-if __name__ == '__main__':
-    db.init_app(app)
+
+db.init_app(app)
 
