@@ -1,3 +1,8 @@
 from db import db
-db.create_all()
+from app import app
+
+with app.app_context():
+    # your code here
+    db.create_all()
+
 
