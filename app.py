@@ -13,7 +13,7 @@ import sqlite3
 app=Flask(__name__)
 app.secret_key="shivam"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL1', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api=Api(app)
 jwt=JWT(app,authenticate,identity) #/auth
