@@ -1,4 +1,4 @@
-
+from resources.store import Store, StoreList
 from security import authenticate, identity
 from flask import Flask
 from flask_restful import Api
@@ -24,9 +24,12 @@ app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(seconds=1000)
 items =[{'name':'urdu'},{'name':'urdu'},{'name':'hindi'}]
 
 api.add_resource(Item,'/<string:name>')
-api.add_resource(Itemlist,'/')
+api.add_resource(Itemlist,'/itemlist')
 api.add_resource(UserRegister,'/Register')
+api.add_resource(StoreList, '/stores')
+api.add_resource(Store, '/store/<string:name>')
 
-
-db.init_app(app)
+if __name__ =="__main__":
+    db.init_app(app)
+    app.run(debug=True)
 

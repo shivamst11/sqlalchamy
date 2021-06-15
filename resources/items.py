@@ -15,17 +15,24 @@ class Item(Resource):
                         required=False,
                         help=" this field cannot be left blank"
                         )
+    parser.add_argument('store_id',
+                        type=int,
+                        required=False,
+                        help=" Every item needs a store id."
+                        )
+    
     @jwt_required()
-    def get(self, name):
+    def get(self,name):
         item=ItemModel.item(name)
 
         if item:
             return item.json(),200 if item else 404
+        
     @jwt_required()
-    def post(self, name):
+    def post(self,name):
         data=Item.parser.parse_args()
-        item = ItemModel.item(name)
-        item1=ItemModel(data["name"])
+        item = ItemModel.item(data['name'])
+        item1=ItemModel(data["name"],data['store_id'])
         if item:
             return {"msg":"Item is already exists"},400
         try:
@@ -39,7 +46,7 @@ class Item(Resource):
 
 
 
-    def delete(self, name):
+    def delete(self,name):
 
         item1 = ItemModel.item(name)
         if item1:
@@ -47,14 +54,14 @@ class Item(Resource):
 
         return {'message': 'Item deleted'}
 
-    def put(self, name):
+    def put(self,name):
         data = Item.parser.parse_args()
-        item = ItemModel.item(name)
+        item = ItemModel.item(data['name'])
 
         if item:
             item.name=data["name"]
         else:
-            item=ItemModel(name)
+            item=ItemModel(**data)
 
         item.save_to_db()
 

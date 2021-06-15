@@ -27,6 +27,9 @@ class UserRegister(Resource):
         data=UserRegister.parser.parse_args()
 
 
+
+
+
         check=UserModel.find_by_username(data["username"])
         if check is None:
             user1=UserModel(data["username"],data["password"])
