@@ -16,7 +16,7 @@ class ItemModel(db.Model):
         self.store_id = store_id
 
     def json(self):
-        return {'name': self.name}
+        return {'name': self.name,"store_id":self.store_id}
 
     def save_to_db(self):
         db.session.add(self)
